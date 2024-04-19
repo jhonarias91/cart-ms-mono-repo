@@ -1,0 +1,12 @@
+version: '3.9'
+services:
+  email_backend:
+    build: .
+    volumes:
+      - .:/app
+    networks:
+      - users-network
+
+networks:
+  users-network:
+    external: true
