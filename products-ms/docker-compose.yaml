@@ -1,51 +1,15 @@
 version: '3.9'
 services:
   backend:
-    container_name: backend
+    container_name: products-ms
     build: .
     ports:
-      - "8000:8000"
+      - "8001:8001"
     volumes:
       - .:/app
-    depends_on:
-      - db
-      - redis
-      - mailhog
     networks:
-      - ambassador-network
-
-  db:
-    image: mysql:8
-    container_name: db
-    #    platform: linux/x86_64 #for m1 chip macs
-    restart: always
-    environment:
-      MYSQL_DATABASE: ambassador
-      MYSQL_ROOT_PASSWORD: root
-    volumes:
-      - .dbdata:/var/lib/mysql
-    ports:
-      - "33066:3306"
-    networks:
-      - ambassador-network
-
-  redis:
-    container_name: redis
-    image: redis
-    ports:
-      - "6379:6379"
-    networks:
-      - ambassador-network
-
-  mailhog:
-    container_name: mailhog
-    image: mailhog/mailhog
-    ports:
-      - "1025:1025"      
-      - "8025:8025"
-    networks:
-      - ambassador-network
+      - products-ms-network
 
 networks:
-  ambassador-network:
+  products-ms-network:
     external: true

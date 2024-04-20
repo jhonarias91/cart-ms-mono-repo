@@ -2,25 +2,27 @@ import React, {SyntheticEvent, useState} from 'react';
 import '../Login.css';
 import axios from 'axios';
 import {Redirect} from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import {auth} from '../firebase'
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [redirect, setRedirect] = useState(false);
+    const history = useHistory(); // useHistory to redirect
 
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault();
 
-        await axios.post('login', {
-            email,
-            password
-        });
-
-        setRedirect(true);
-    }
-
-    if (redirect) {
-        return <Redirect to={'/'}/>;
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+            history.push('/'); // Redireccionar al home después del login exitoso
+        } catch (error) {
+            // Manejo de errores, por ejemplo, mostrar un mensaje de error al usuario
+            console.error("Error de autenticación", error);
+        }
+        
     }
 
     return (
