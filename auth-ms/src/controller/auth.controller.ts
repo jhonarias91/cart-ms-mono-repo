@@ -3,11 +3,11 @@ import * as admin from 'firebase-admin';
 import UserAdapter from "../UserAdapter";
 import {CircuitBreakerOptions} from '../breaker/CircuitBreaker';
 
-var serviceAccount = require("./firebase-adminsdk.json");
+import firebaseConfig from  "../firebase-adminsdk";
 
 if (!admin.apps.length) {
     admin.initializeApp({
-      credential: admin.credential.cert(serviceAccount)
+      credential: admin.credential.cert(firebaseConfig)
     });
   }
 
@@ -18,6 +18,7 @@ const options: CircuitBreakerOptions = {
 };
 
 const userAdapter = new UserAdapter("http://localhost:80", options);
+
 
 export const Login = async (req: Request, res: Response) => {
 
