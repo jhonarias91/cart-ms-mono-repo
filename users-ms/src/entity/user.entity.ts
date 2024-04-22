@@ -1,14 +1,17 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, PrimaryColumn} from "typeorm";
 
 @Entity()
 export class User {
-    @PrimaryGeneratedColumn()
-    id: number;
+    
+    @PrimaryColumn()
+    uid: string;
 
     @Column()
     first_name: string;
 
-    @Column()
+    @Column({
+        nullable:true
+     })
     last_name: string;
 
     @Column({
@@ -16,11 +19,11 @@ export class User {
     })
     email: string;
 
-    @Column({
-        select: false
-    })
-    password: string;
+   
 
+    @Column()
+    provider: string;
+   
     @Column()
     is_ambassador: boolean;
 

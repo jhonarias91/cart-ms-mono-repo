@@ -13,7 +13,7 @@ const Nav = (props: any) => {
 
     let menu;
 
-    if (props.user?.id) {
+    if (props.user?.uid) {
         menu = (
             <div className="col-md-3 text-end">
                 <Link to={'/rankings'} className="btn me-2">Rankings</Link>

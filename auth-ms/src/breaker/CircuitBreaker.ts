@@ -1,4 +1,4 @@
-class CircuitBreaker {
+export class CircuitBreaker {
 
   private requestFunction: (...args: any[]) => Promise<string>;
   private state: BREACKER_STATE;
@@ -64,6 +64,15 @@ enum BREACKER_STATE{
 
 export interface CircuitBreakerOptions {
   failureThreshold: number;
-  baseTimeout: number; // miliseconds
+  baseTimeout: number; 
   maxTimeout: number;
+}
+
+export interface UserData {
+  first_name: string;
+  last_name?: string;
+  email: string;
+  uid: string;
+  provider: string;
+  is_ambassador: boolean;
 }

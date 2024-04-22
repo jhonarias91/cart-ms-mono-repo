@@ -46,5 +46,7 @@ Al tener varias instancias del mismo MS, se debe desactivar:  "synchronize": fal
   - En una sola réplica del MS correr la migración o en un step del pipeline despues que levante la bd y antes del MS.
     se corre el scrip typeorm para traspilar el ts
     ```npm run typeorm migration:run```
+    para eliminar
+    ```npm run typeorm migration:revert```
 
 - Crear la data: ```npm run seeders```

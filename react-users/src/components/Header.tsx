@@ -8,7 +8,7 @@ const Header = (props: { user: User }) => {
     const [description, setDescription] = useState('Share links to earn money');
 
     useEffect(() => {
-        if (props.user?.id) {
+        if (props.user?.uid) {
             setTitle(`$${props.user.revenue}`);
             setDescription('You have earned this far');
         } else {
@@ -19,7 +19,7 @@ const Header = (props: { user: User }) => {
 
     let buttons;
 
-    if (!props.user?.id) {
+    if (!props.user?.uid) {
         buttons = (
             <p>
                 <Link to={'/login'} className="btn btn-primary my-2">Login</Link>

@@ -15,7 +15,6 @@ const Layout = (props: any) => {
             async () => {
                 try {
                     const {data} = await axios.get('user');
-
                     props.setUser(data);
                 } catch (e) {
                     console.log(e);

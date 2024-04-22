@@ -1,6 +1,9 @@
 import React, {Component, SyntheticEvent} from 'react';
 import axios from 'axios';
 import {Redirect} from 'react-router-dom';
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth } from '../firebase'; 
+import { log } from 'console';
 
 class Register extends Component {
     firstName = '';
@@ -9,23 +12,88 @@ class Register extends Component {
     password = '';
     passwordConfirm = '';
     state = {
-        redirect: false
+        redirect: false,
+        notify: {
+            show: false,
+            message: '',
+            isError: false
+        }
+    };   
+    setNotify = (show:boolean, isError: boolean = false, message:any) => {
+        this.setState({
+            notify: {
+                show: show,
+                message: message,
+                isError: isError
+            }
+        });
+        
+        // hide notification after 3s
+        setTimeout(() => {
+            this.setState({
+                notify: {
+                    show: false,
+                    message: '',
+                    isError: false
+                }
+            });
+        }, 3000);
     };
+
 
     submit = async (e: SyntheticEvent) => {
         e.preventDefault();
 
-        await axios.post('register', {
-            first_name: this.firstName,
-            last_name: this.lastName,
-            email: this.email,
-            password: this.password,
-            password_confirm: this.passwordConfirm
-        });
+        if (this.password.trim().length === 0 || this.passwordConfirm.trim().length === 0 || 
+        this.email.trim().length === 0 ) {
+            console.log("Passwords and email can not be empt")
+            this.setNotify(true, true, "Passwords and email can not be empty");
+            return;
+        }
 
-        this.setState({
-            redirect: true
-        });
+        if (this.password !== this.passwordConfirm) {
+            console.error("Passwords do not match");
+            this.setNotify(true, true, "Passwords do not match");
+            return;
+        }
+
+        try {
+            const userCredential = await createUserWithEmailAndPassword(
+                auth,
+                this.email,
+                this.password
+            );
+            const user = userCredential.user;
+            await updateProfile(user, {
+                displayName: `${this.firstName} ${this.lastName}`
+            });
+            console.log("User registered: ", userCredential.user);
+            axios({
+                method: 'post',
+                url: '/api/auth/register',
+                baseURL: process.env.REACT_APP_AUTH_MS_BASE_URL,                
+                data:{
+                    first_name: this.firstName,
+                    last_name: this.lastName,
+                    email:this.email,                    
+                    uid: user.uid,
+                    provider:user.providerId
+                }                    
+              })
+            .then(response => {
+              console.log('Success from us-ms:', response.data);
+                this.setState({
+                    redirect: true
+                });
+            })
+
+            this.setState({
+                redirect: true
+            });
+        } catch (err:any) {
+            console.error(err);
+            this.setNotify(true, true, err.message  || "Failed to register");
+        }
     }
 
     render() {

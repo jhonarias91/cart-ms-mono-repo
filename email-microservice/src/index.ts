@@ -1,6 +1,7 @@
 import { log } from "console";
 import { EachMessagePayload, Kafka } from "kafkajs";
 import { createTransport } from "nodemailer"
+
 const kafka = new Kafka({
     clientId: 'my_email-consumer',
     brokers: ['pkc-419q3.us-east4.gcp.confluent.cloud:9092'],
@@ -49,10 +50,8 @@ const run = async () => {
             });
 
             await transporter.close();
-
         }
     })
-
 }
 run().then(console.error);
 

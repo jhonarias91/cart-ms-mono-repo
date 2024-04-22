@@ -15,5 +15,3 @@ const firebaseConfig  = {
 };
 
 export default firebaseConfig ;
-//todo: del this
-console.log(firebaseConfig );

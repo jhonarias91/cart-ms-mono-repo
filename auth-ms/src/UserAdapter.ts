@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import CircuitBraker from './breaker/CircuitBreaker';
+import {CircuitBreaker, CircuitBreakerOptions,UserData} from './breaker/CircuitBreaker';
 
 
 class UserAdapter {
@@ -18,16 +18,14 @@ class UserAdapter {
   // Esta es la función que realmente realiza la solicitud HTTP.
   private async updateOrCreateUserRequest(userData: any): Promise<any> {
     try {
-      const response = await axios.post(`${this.userServiceUrl}/api/users/login`, userData);
-      return response.data; // Asegúrate de retornar solo la data necesaria
+      const response = await axios.post(`${this.userServiceUrl}/api/users/updatecreate`, userData);
+      return response.data; 
     } catch (error) {
-      // Aquí puedes manejar errores específicos si es necesario antes de lanzarlos
       throw error;
     }
   }
-
-  // Método expuesto para actualizar o crear el usuario, que pasa por el circuit breaker
-  public async updateOrCreateUser(userData: any): Promise<any> {
+  
+  public async updateOrCreateUser(userData: UserData): Promise<any> {
     return this.circuitBreaker.call(userData);
   }
   
