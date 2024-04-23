@@ -1,1 +1,27 @@
+# Archivos y directorios de Node
 node_modules
+npm-debug.log
+npm-error.log
+yarn-error.log
+
+# Directorios de control de versiones
+.git
+.gitignore
+.svn
+.hg
+
+# Archivos de configuración y logs
+.config
+.env
+.env.*
+!.env.example
+*.log
+
+# Otros archivos y directorios que no son necesarios en producción
+coverage/
+test/
+tests/
+*.md
+*.yml
+Dockerfile
+*.Dockerignore

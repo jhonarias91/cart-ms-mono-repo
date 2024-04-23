@@ -1,10 +1,13 @@
-FROM node:21
+FROM node:21-alpine
 
 WORKDIR /app
 COPY package*.json .
 
-RUN npm install
+RUN npm install --production && npm cache clean --force
 COPY . .
+EXPOSE 3500
 CMD ["npm","start"]
 
-EXPOSE 3500
+#Build:
+#docker build -t jhonarias91/auth-ms:v1 .
+#docker push jhonarias91/auth-ms:v1

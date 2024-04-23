@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-users
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: react-users
+  template:
+    metadata:
+      labels:
+        app: react-users
+        area: front
+    spec:
+      containers:
+      - name: react-users
+        image: jhonarias91/react-users:v2
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        ports:
+        - containerPort: 4000
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: react-users
+spec:
+  selector:
+    app: react-users
+  ports:
+  - port: 4000
+    targetPort: 80
+  type: NodePort
