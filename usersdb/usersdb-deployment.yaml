@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: usersdb-deployment 
+  labels:
+    app: usersdb
+spec:
+  replicas: 1
+  selector:
+    matchLabels: 
+      app: usersdb
+  template:
+    metadata:
+      labels:
+        app: usersdb
+    spec:
+      containers:
+        - name: usersdb 
+          image: mysql:8
+          env:
+            - name: MYSQL_DATABASE
+              value: users_db
+            - name: MYSQL_ROOT_PASSWORD
+              value: root
+            - name: TZ
+              value: 'America/Bogota'
+          ports:
+            - containerPort: 3306 
+          volumeMounts:
+            - name: dbdata
+              mountPath: /var/lib/mysql 
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "10m"
+      volumes:
+        - name: dbdata
+
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: usersdb
+spec:
+  selector:
+    app: usersdb
+  ports:
+    - port: 3306
+      targetPort: 3306 
+  type: NodePort
+
