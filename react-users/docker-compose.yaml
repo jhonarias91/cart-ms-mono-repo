@@ -1,0 +1,9 @@
+version: '3.9'
+services:
+  react-users:    
+    build: .
+    scale: 1
+    volumes:
+      - .:/app
+    ports:
+      - 4000:80

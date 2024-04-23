@@ -22,8 +22,9 @@
         "web-vitals": "^1.1.1"
     },
     "scripts": {
-        "start": "set NODE_OPTIONS=--openssl-legacy-provider && set PORT=4000 && react-scripts start",
-        "build": "react-scripts build",
+        "start_win": "set NODE_OPTIONS=--openssl-legacy-provider && set PORT=4000 && react-scripts start",
+        "start": "NODE_OPTIONS=--openssl-legacy-provider PORT=4000 react-scripts start",
+        "build": "NODE_OPTIONS=--openssl-legacy-provider PORT=4000 react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
     },
