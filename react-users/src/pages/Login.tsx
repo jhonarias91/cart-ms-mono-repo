@@ -8,6 +8,7 @@ import {auth} from '../firebase';
 import {User} from "../models/user";
 import { connect } from 'react-redux';
 import { setUser } from '../redux/actions/setUserAction';
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 const mapDispatchToProps = (dispatch: any) => ({
   setUser: (user:User) => dispatch(setUser(user))
@@ -32,9 +33,9 @@ const Login = (props: any) => {
                   const userData:User = {
                     uid: user.uid, // ID único del usuario
                     first_name: user.displayName,
-                    last_name:  "", // Firebase no provee el apellido, necesitarás un método para establecerlo
-                    email: user.email, // Email del usuario
-                    provider: user.providerData[0].providerId, // Proveedor de autenticación (e.g., 'password', 'google.com')                   
+                    last_name:  "", 
+                    email: user.email, 
+                    provider: user.providerData[0].providerId, 
                     revenue:0
                   };
                   props.setUser(userData);
@@ -70,6 +71,32 @@ const Login = (props: any) => {
         }        
     }
 
+      //Google auth
+    const signInWithGoogle = async () => {
+      const provider = new GoogleAuthProvider();
+      try {
+        const userCredential = await signInWithPopup(auth, provider);
+        const user = userCredential.user;
+  
+        const userData: User = {
+          uid: user.uid,
+          first_name: user.displayName,
+          last_name: "",
+          email: user.email,
+          provider: user.providerData[0].providerId,
+          revenue: 0
+        };
+  
+        props.setUser(userData);
+        console.log(userData);
+        history.push('/');
+      } catch (error) {
+        console.error("Error on auth", error);
+      }
+    };
+  
+    //end Google
+
     return (
         <main className="form-signin">
             <form onSubmit={submit}>
@@ -87,8 +114,28 @@ const Login = (props: any) => {
                     />
                     <label htmlFor="floatingPassword">Password</label>
                 </div>
-
                 <button className="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+                <button
+                  className="btn btn-lg btn-google"
+                  onClick={signInWithGoogle}
+                  style={{
+                    maxWidth: '50px', 
+                    width: 'auto', 
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    margin: '10px auto', 
+                    padding: '0.375rem 0.75rem', 
+                  }}
+                >
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/120px-Google_%22G%22_logo.svg.png?20230822192911"
+                alt="Google Icon"
+                style={{ marginRight: '10px' }}
+              />
+              Sign in with Gooogle
+      </button>
+                
             </form>
         </main>
     );

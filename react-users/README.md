@@ -18,6 +18,9 @@ You will also see any lint errors in the console.
 docker build -t jhonarias91/react-users:v2 .
 docker push jhonarias91/react-users:v2
 docker run -p4000:80 --name react-users jhonarias91/react-users:v2
+
+_ Eliminar container e image
+```docker compose down --rmi all```
 # K8S
 
 - Create

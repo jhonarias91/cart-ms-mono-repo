@@ -1,5 +1,7 @@
 FROM node:alpine as build
 
+# Definir el argumento de compilación
+ARG CACHEBUST=1
 WORKDIR /app
 COPY package*.json .
 RUN npm install
