@@ -5,8 +5,15 @@ import {Redirect} from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import {auth} from '../firebase';
+import {User} from "../models/user";
+import { connect } from 'react-redux';
+import { setUser } from '../redux/actions/setUserAction';
 
-const Login = () => {
+const mapDispatchToProps = (dispatch: any) => ({
+  setUser: (user:User) => dispatch(setUser(user))
+});
+
+const Login = (props: any) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [redirect, setRedirect] = useState(false);
@@ -21,8 +28,20 @@ const Login = () => {
                 .then((userCredential) => {
                   // Usuario autenticado
                   const user = userCredential.user;
-                  user.getIdToken().then((tokenId) => {                    
-              
+
+                  const userData:User = {
+                    uid: user.uid, // ID único del usuario
+                    first_name: user.displayName,
+                    last_name:  "", // Firebase no provee el apellido, necesitarás un método para establecerlo
+                    email: user.email, // Email del usuario
+                    provider: user.providerData[0].providerId, // Proveedor de autenticación (e.g., 'password', 'google.com')                   
+                    revenue:0
+                  };
+                  props.setUser(userData);
+                  history.push('/');
+                  user.getIdToken().then((tokenId) => {                                       
+                  
+/*        
                     axios({
                         method: 'post',
                         url: '/api/auth/login',
@@ -37,7 +56,7 @@ const Login = () => {
                     .catch(error => {
                       console.error('Error:', error);
                     });
-              
+              */
                   }).catch((error) => {
                     console.error("Error getting thetoken ID", error);
                   });
@@ -48,8 +67,7 @@ const Login = () => {
             }
         } catch (error) {
             console.error("Auth issue", error);
-        }
-        
+        }        
     }
 
     return (
@@ -76,4 +94,5 @@ const Login = () => {
     );
 };
 
-export default Login;
+//export default Login;
+export default connect(null, mapDispatchToProps)(Login);

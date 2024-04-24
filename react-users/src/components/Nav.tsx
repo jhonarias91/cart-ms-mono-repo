@@ -7,8 +7,13 @@ import {setUser} from "../redux/actions/setUserAction";
 
 const Nav = (props: any) => {
     const logout = async () => {
-        await axios.post('logout');
-        props.setUser(null);
+        try {
+            await axios.post('logout')
+            props.setUser(null); 
+        } catch (error) {
+            console.error('Error logging out:', error);
+            props.setUser(null); 
+        }
     }
 
     let menu;

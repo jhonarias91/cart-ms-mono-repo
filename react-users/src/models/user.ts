@@ -1,8 +1,8 @@
 export class User {
-    uid!: number;
-    first_name!: string;
-    last_name!: string;
-    email!: string;
-    provider!: string;
-    revenue!: number;
+    uid!: string;
+    first_name!: string|null;
+    last_name!: string|null;
+    email!: string | null;
+    provider!: string |null ;
+    revenue!: number | null;
 }

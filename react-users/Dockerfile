@@ -5,10 +5,7 @@ COPY package*.json .
 RUN npm install
 COPY . .
 
-RUN npm run build
-
-# Clean npm cache
-RUN npm cache clean --force
+RUN npm run build && npm cache clean --force
 
 # Etapa 2: Servir la aplicación con Nginx
 FROM nginx:alpine
