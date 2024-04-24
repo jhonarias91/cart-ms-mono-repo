@@ -8,10 +8,6 @@
 Verifica el current:
 kubectl config get-contexts
 
-
-
-
-
 # K8S 
 
 - Cambiar de contexto:

@@ -19,8 +19,6 @@ export class User {
     })
     email: string;
 
-   
-
     @Column()
     provider: string;
    

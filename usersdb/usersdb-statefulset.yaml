@@ -1,13 +1,14 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: usersdb-deployment 
+  name: usersdb-statefulset
   labels:
     app: usersdb
 spec:
+  serviceName: "usersdb-service"
   replicas: 1
   selector:
-    matchLabels: 
+    matchLabels:
       app: usersdb
   template:
     metadata:
@@ -15,7 +16,7 @@ spec:
         app: usersdb
     spec:
       containers:
-        - name: usersdb 
+        - name: usersdb
           image: mysql:8
           env:
             - name: MYSQL_DATABASE
@@ -25,27 +26,32 @@ spec:
             - name: TZ
               value: 'America/Bogota'
           ports:
-            - containerPort: 3306 
+            - containerPort: 3306
           volumeMounts:
             - name: dbdata
-              mountPath: /var/lib/mysql 
+              mountPath: /var/lib/mysql
           resources:
             limits:
-              memory: "128Mi"
-              cpu: "10m"
-      volumes:
-        - name: dbdata
+              memory: "32Mi"
+              cpu: "5m"
+  volumeClaimTemplates:
+    - metadata:
+        name: dbdata
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 10Gi
 
 ---
 apiVersion: v1
 kind: Service
-metadata: 
+metadata:
   name: usersdb-service
 spec:
   selector:
     app: usersdb
   ports:
     - port: 3306
-      targetPort: 3306 
+      targetPort: 3306
   type: NodePort
-
