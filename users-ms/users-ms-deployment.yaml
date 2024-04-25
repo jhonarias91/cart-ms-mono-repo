@@ -22,6 +22,9 @@ spec:
             cpu: "500m"
         ports:
         - containerPort: 8000
+        envFrom:
+        - configMapRef:
+            name: users-ms-config
 ---
 
 apiVersion: v1

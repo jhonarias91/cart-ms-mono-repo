@@ -6,6 +6,7 @@
 
 - Create
 
+```kubectl apply -f react-users-config.yaml```
 ```kubectl apply -f react-users-deployment.yaml```
 
 - Delete

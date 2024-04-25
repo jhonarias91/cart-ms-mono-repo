@@ -25,7 +25,7 @@ export default function Home() {
         if (code != undefined) {
             (
                 async () => {
-                    //http://localhost:8000/api/checkout
+                    //http://localhost:8001/api/checkout
                     const {data} = await axios.get(`${constants.endpoint}/links/${code}`);
 
                     setUser(data.user);
@@ -69,7 +69,7 @@ export default function Home() {
             setError('Please select at least one product!'); 
             return null;
         }
-         //http://localhost:8000/api/checkout/orders
+         //http://localhost:8001/api/checkout/orders
         const {data} = await axios.post(`${constants.endpoint}/orders`, {
             first_name,
             last_name,

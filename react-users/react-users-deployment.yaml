@@ -22,7 +22,10 @@ spec:
             cpu: "100m"
         ports:
         - containerPort: 4000
----
+        envFrom:
+        - configMapRef:
+            name: react-users-config
+---  
 
 apiVersion: v1
 kind: Service
@@ -34,4 +37,4 @@ spec:
   ports:
   - port: 4000
     targetPort: 80
-  type: NodePort
+  type: LoadBalancer

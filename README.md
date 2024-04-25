@@ -43,6 +43,11 @@ _Name space para dev_
 
 - EAI_AGAIN  : es un error del DNS.
 
+- Firebase domain not auth
+    Agregar la external ip de react a los autorizados en firebase.
+
+## States
+- CrashLoopBackOff: error al iniciar el container.
 
     # Comands
 

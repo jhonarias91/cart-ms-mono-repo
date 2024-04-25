@@ -5,8 +5,9 @@
 ```docker build -t jhonarias91/users-ms:v1 .```
 ```docker push jhonarias91/users-ms:v1```
 
-
 - Create K8S
+
+```kubectl apply -f users-ms-config.yaml```
 ```kubectl apply -f users-ms-deployment.yaml```
 
 - Delete
@@ -26,7 +27,7 @@
 ```kubectl exec -it users-ms-deployment-54f9f5d47c-rg4zp sh```
 
 - Migración first time:
-- ```kubectl exec -it users-ms-deployment-54f9f5d47c-npnv8 -- npm run typeorm migration:run```
+ ```kubectl exec -it users-ms-deployment-54f9f5d47c-npnv8 -- npm run typeorm migration:run```
 
 ## Considerations
 
@@ -74,5 +75,9 @@ Al tener varias instancias del mismo MS, se debe desactivar:  "synchronize": fal
     ```npm run typeorm migration:run```
     para eliminar
     ```npm run typeorm migration:revert```
+
+  - O correr directamente el script
+ ```kubectl exec -it users-ms-deployment-54f9f5d47c-npnv8 -- npm run typeorm migration:run```
+
 
 - Crear la data: ```npm run seeders```

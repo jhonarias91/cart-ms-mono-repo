@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: auth-ms
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: auth-ms
@@ -15,13 +15,16 @@ spec:
     spec:
       containers:
       - name: auth-ms
-        image: jhonarias91/auth-ms:v1
+        image: jhonarias91/auth-ms:v2
         resources:
           limits:
             memory: "128Mi"
             cpu: "10m"
         ports:
         - containerPort: 3500
+        envFrom:
+        - configMapRef:
+            name: auth-ms-config     
 ---
 
 apiVersion: v1
