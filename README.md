@@ -23,7 +23,13 @@ _Name space para dev_
 
 - kubectl create namespace dev
 
+## K8S GCP
+- Conectarse a GCP, crea un contexto, que es donde se guardan las configuraciones, apunta a un enviroment distinto
 
+- ```gcloud container clusters get-credentials cart-ms-autopilot-1 --region us-central1 --project cart-ms-auth-ms```
+
+- __Crud de contexts__
+- ```kubectl config```
 
 # Common Isssues
 
