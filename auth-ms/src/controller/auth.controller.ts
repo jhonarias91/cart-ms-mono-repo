@@ -2,7 +2,7 @@ import {Request, Response} from "express";
 import * as admin from 'firebase-admin';
 import UserAdapter from "../UserAdapter";
 import {CircuitBreakerOptions, UserData} from '../breaker/CircuitBreaker';
-import {sign, verify} from "jsonwebtoken";
+import {sign} from "jsonwebtoken";
 import dotenv from 'dotenv';
 import firebaseConfig from  "../firebase-adminsdk";
 import producer  from "../kafka/config";
@@ -18,7 +18,7 @@ if (!admin.apps.length) {
 const options: CircuitBreakerOptions = {
   failureThreshold: 3,
   baseTimeout: 300, 
-  maxTimeout: 5000  
+  maxTimeout: 20000  
 };
 
 const userAdapter = new UserAdapter(process.env.USERS_MS_BASE_URL, options);

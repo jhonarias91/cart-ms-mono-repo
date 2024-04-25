@@ -5,6 +5,7 @@ import {routes} from "./routes";
 import dotenv from 'dotenv';
 import cookieParser from "cookie-parser";
 import {createClient} from "redis";
+import { env } from 'process';
 
 dotenv.config();
 
@@ -26,8 +27,8 @@ createConnection().then(async () => {
 
     routes(app);
 
-    app.listen(8000, () => {
-        console.log('listening to port 8000')
+    app.listen(process.env.PORT, () => {
+        console.log('listening to port',process.env.PORT);
     });
 });
 

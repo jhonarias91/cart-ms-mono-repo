@@ -1,6 +1,32 @@
-## Run
+## Users-ms
+# K8S 
+- Deploy image
 
-- docker-compose up 
+```docker build -t jhonarias91/users-ms:v1 .```
+```docker push jhonarias91/users-ms:v1```
+
+
+- Create K8S
+```kubectl apply -f users-ms-deployment.yaml```
+
+- Delete
+
+```kubectl delete -f users-ms-deployment.yaml```
+
+```kubectl logs usersdb-statefulset-0```
+
+- logs
+
+```kubectl logs users-ms-deployment-54f9f5d47c-rg4vq```
+
+- Describe
+```kubectl describe pod usersdb-statefulset-0```
+
+- Iterative mode
+```kubectl exec -it users-ms-deployment-54f9f5d47c-rg4zp sh```
+
+- Migración first time:
+- ```kubectl exec -it users-ms-deployment-54f9f5d47c-npnv8 -- npm run typeorm migration:run```
 
 ## Considerations
 

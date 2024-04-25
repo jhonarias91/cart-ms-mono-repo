@@ -1,4 +1,3 @@
-import { log } from "console";
 import { EachMessagePayload, Kafka } from "kafkajs";
 import { createTransport } from "nodemailer"
 

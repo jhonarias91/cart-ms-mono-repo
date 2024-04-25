@@ -19,14 +19,49 @@ Verificar el context
 Crear context
 
 
-
 _Name space para dev_
 
 - kubectl create namespace dev
 
 
 
-# Isssues
+# Common Isssues
 
 - => CANCELED [backend internal] load build context   
     -   Delete volumen .dbdata and temp files like: CANCELED, transfering, etc at root level.
+
+- error: error validating "usersdb-statefulset.yaml": error validating data: failed to download openapi: Get "https://127.0.0.1:50230/openapi/v2?timeout=32s": EOF; if you choose to ignore these errors, turn validation off with --validate=false
+
+    - ```minikube delete```
+    - ```minikube start```
+
+- EAI_AGAIN  : es un error del DNS.
+
+
+    # Comands
+
+### Info comands
+- all pods
+```kubectl get pods```
+- Info de un pod
+```kubectl describe pod usersdb-statefulset-0```
+- List pods (front, back, external)
+```kubectl get pods -l area=external``` 
+
+- list logs 
+```kubectl logs usersdb-statefulset-0```
+
+### Deployment comands
+
+- Run config
+```kubectl apply -f usersdb-statefulset.yaml```
+- Editar un deployment
+```kubectl edit usersdb-statefulset-0```
+
+- Interact mode:
+```kubectl exec -it users-ms-deployment-54f9f5d47c-rg4zp sh```
+
+### Delete
+- Delete a pod
+
+```kubectl delete pods users-ms-deployment-54f9f5d47c-rg4vq```

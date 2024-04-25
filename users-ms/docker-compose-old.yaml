@@ -1,0 +1,50 @@
+version: '3.9'
+services:
+  users:    
+    build: .
+    scale: 3
+    volumes:
+      - .:/app
+    depends_on:
+      - usersdb
+      - redis
+      - mailhog
+    networks:
+      - users-network
+
+  usersdb:
+    image: mysql:8
+    container_name: usersdb
+    #    platform: linux/x86_64 #for m1 chip macs
+    restart: always
+    environment:
+      MYSQL_DATABASE: users_db
+      MYSQL_ROOT_PASSWORD: root
+      TZ: 'America/Bogota'
+    volumes:
+      - .dbdata:/var/lib/mysql
+    ports:
+      - "33066:3306"
+    networks:
+      - users-network
+
+  redis:
+    container_name: redis
+    image: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - users-network
+
+  mailhog:
+    container_name: mailhog
+    image: mailhog/mailhog
+    ports:
+      - "1025:1025"      
+      - "8025:8025"
+    networks:
+      - users-network
+
+networks:
+  users-network:
+    external: true

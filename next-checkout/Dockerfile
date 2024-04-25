@@ -1,5 +1,5 @@
 # Multi-stage-build Build
-FROM node:alpine as builder
+FROM node:21-alpine as builder
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
@@ -7,7 +7,7 @@ COPY . .
 RUN npm run build && npm cache clean --force
 
 #Stage 2 execution
-FROM node:alpine
+FROM node:21-alpine
 WORKDIR /app
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next ./.next

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: users-ms
+  name: users-ms-deployment
 spec:
   replicas: 2
   selector:
@@ -18,10 +18,10 @@ spec:
         image: jhonarias91/users-ms:v1
         resources:
           limits:
-            memory: "128Mi"
-            cpu: "10m"
+            memory: "512Mi"
+            cpu: "500m"
         ports:
-        - containerPort: 3500
+        - containerPort: 8000
 ---
 
 apiVersion: v1
@@ -32,6 +32,6 @@ spec:
   selector:
     app: users-ms
   ports:
-  - port: 3500
-    targetPort: 3500
+  - port: 8000
+    targetPort: 8000
   type: LoadBalancer 

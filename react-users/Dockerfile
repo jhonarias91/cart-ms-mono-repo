@@ -1,4 +1,4 @@
-FROM node:alpine as build
+FROM node:21-alpine as build
 
 # Definir el argumento de compilación
 ARG CACHEBUST=1

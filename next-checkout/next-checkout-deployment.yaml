@@ -1,37 +1,37 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: react-users
+  name: next-checkout
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: react-users
+      app: next-checkout
   template:
     metadata:
       labels:
-        app: react-users
+        app: next-checkout
         area: front
     spec:
       containers:
-      - name: react-users
-        image: jhonarias91/react-users:v1
+      - name: next-checkout
+        image: jhonarias91/next-checkout:v1
         resources:
           limits:
-            memory: "128Mi"
-            cpu: "100m"
+            memory: "256Mi"
+            cpu: "500m"
         ports:
-        - containerPort: 4000
+        - containerPort: 5000
 ---
 
 apiVersion: v1
 kind: Service
 metadata:
-  name: react-users
+  name: next-checkout
 spec:
   selector:
-    app: react-users
+    app: next-checkout
   ports:
-  - port: 4000
-    targetPort: 80
+  - port: 5000
+    targetPort: 5000
   type: NodePort

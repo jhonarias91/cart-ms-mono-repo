@@ -14,6 +14,7 @@ spec:
     metadata:
       labels:
         app: usersdb
+        area: data
     spec:
       containers:
         - name: usersdb
@@ -25,6 +26,8 @@ spec:
               value: root
             - name: TZ
               value: 'America/Bogota'
+            - name: MYSQL_ALLOW_EMPTY_PASSWORD
+              value: "yes"
           ports:
             - containerPort: 3306
           volumeMounts:
@@ -32,8 +35,8 @@ spec:
               mountPath: /var/lib/mysql
           resources:
             limits:
-              memory: "32Mi"
-              cpu: "5m"
+              memory: "512Mi"
+              cpu: "50m"
   volumeClaimTemplates:
     - metadata:
         name: dbdata
@@ -41,17 +44,17 @@ spec:
         accessModes: [ "ReadWriteOnce" ]
         resources:
           requests:
-            storage: 10Gi
+            storage: 4Gi
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: usersdb-service
+  name: usersdb
 spec:
   selector:
     app: usersdb
   ports:
     - port: 3306
       targetPort: 3306
-  type: NodePort
+  type: ClusterIP

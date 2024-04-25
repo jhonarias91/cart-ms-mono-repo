@@ -1,46 +1,40 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mailhog-development
+  name: redis-development
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mailhog
+      app: redis
   template:
     metadata:
       labels:
-        app: mailhog
+        app: redis
         area: external
     spec:
       containers:
-      - name: mailhog
-        image: mailhog/mailhog
+      - name: redis
+        image: redis
         resources:
           limits:
             memory: "128Mi"
             cpu: "500m"
         ports:
-        - containerPort: 1025
-          hostPort: 1025
-        - containerPort: 8025
-          hostPort: 8025
+        - containerPort: 6379
+          #hostPort: 6379 gcp not allowed
 ---
 
 apiVersion: v1
 kind: Service
 metadata:
-  name: mailhog
+  name: redis
 spec:
   selector:
-    app: mailhog
+    app: redis
   ports:
-  - name: smtp
+  - name: redis-port
     protocol: TCP
-    port: 1025
-    targetPort: 1025
-  - name: http
-    protocol: TCP
-    port: 8025
-    targetPort: 8025
+    port: 6379
+    targetPort: 6379
   type: ClusterIP

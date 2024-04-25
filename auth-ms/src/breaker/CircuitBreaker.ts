@@ -41,7 +41,7 @@ export class CircuitBreaker {
 
   private onSuccess(): void {
     this.failureCount = 0;
-    if (this.state === BREACKER_STATE.HALF_OPEN) {
+    if (this.state === BREACKER_STATE.CLOSED) {
       this.state = BREACKER_STATE.HALF_OPEN;
     }
   }

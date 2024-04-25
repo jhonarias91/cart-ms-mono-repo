@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: email-ms-development
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: email-ms
+  template:
+    metadata:
+      labels:
+        app: email-ms
+        area: backend
+    spec:
+      containers:
+      - name: email-ms
+        image: jhonarias91/email-ms:v1
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "250m"
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: email-ms
+spec:
+  selector:
+    app: email-ms
+  ports:
+      - port: 12345
+        targetPort: 12345
+  type: ClusterIP

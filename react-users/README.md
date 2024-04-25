@@ -1,3 +1,19 @@
+# K8S
+- Deploy image
+
+```docker build -t jhonarias91/react-users:v1 .```
+```docker push jhonarias91/react-users:v1```
+
+- Create
+
+```kubectl apply -f react-users-deployment.yaml```
+
+- Delete
+
+```kubectl delete -f react-users-deployment.yaml```
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
