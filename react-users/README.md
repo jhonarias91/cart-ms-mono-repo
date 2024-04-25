@@ -11,7 +11,9 @@
 
 - Delete
 
+```kubectl delete -f react-users-config.yaml```
 ```kubectl delete -f react-users-deployment.yaml```
+
 
 
 

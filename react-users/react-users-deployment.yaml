@@ -38,3 +38,4 @@ spec:
   - port: 4000
     targetPort: 80
   type: LoadBalancer
+  loadBalancerIP: 146.148.38.150
