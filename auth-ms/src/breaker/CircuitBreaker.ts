@@ -8,7 +8,7 @@ export class CircuitBreaker {
   private maxTimeout: number;
   private nextAttempt: number;
 
-  constructor(requestFunction: () => Promise<any>, options: CircuitBreakerOptions) {
+  constructor(requestFunction: (...args:any []) => Promise<any>, options: CircuitBreakerOptions) {
     this.requestFunction = requestFunction;
     this.state =BREACKER_STATE.CLOSED;
     this.failureThreshold = options.failureThreshold;
@@ -41,8 +41,8 @@ export class CircuitBreaker {
 
   private onSuccess(): void {
     this.failureCount = 0;
-    if (this.state === BREACKER_STATE.CLOSED) {
-      this.state = BREACKER_STATE.HALF_OPEN;
+    if (this.state === BREACKER_STATE.HALF_OPEN) {
+      this.state = BREACKER_STATE.CLOSED;
     }
   }
 

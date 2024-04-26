@@ -15,11 +15,11 @@ spec:
     spec:
       containers:
       - name: users-ms
-        image: jhonarias91/users-ms:v1
+        image: jhonarias91/users-ms:v4
         resources:
           limits:
-            memory: "512Mi"
-            cpu: "500m"
+            memory: "256Mi"
+            cpu: "200m"
         ports:
         - containerPort: 8000
         envFrom:
@@ -38,3 +38,4 @@ spec:
   - port: 8000
     targetPort: 8000
   type: LoadBalancer 
+  loadBalancerIP: 35.184.199.123

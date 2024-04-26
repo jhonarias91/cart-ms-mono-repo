@@ -5,7 +5,6 @@ import {routes} from "./routes";
 import dotenv from 'dotenv';
 import cookieParser from "cookie-parser";
 import {createClient} from "redis";
-import { env } from 'process';
 
 dotenv.config();
 
@@ -18,17 +17,14 @@ createConnection().then(async () => {
 
     const app = express();
 
-    app.use(cookieParser());
     app.use(express.json());
-    app.use(cors({
-        credentials: true,
-        origin: ['http://localhost:3000', 'http://localhost:4000', 'http://localhost:5000']
-    }));
-
-    routes(app);
+    const router = express.Router();
+    routes(router);
+    // Usar el router en la aplicación
+    app.use(router);
 
     app.listen(process.env.PORT, () => {
-        console.log('listening to port',process.env.PORT);
+        console.log('listening to port ',process.env.PORT);
     });
 });
 

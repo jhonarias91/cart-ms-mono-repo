@@ -8,7 +8,7 @@ class UserAdapter {
 
   constructor(userServiceUrl: string, circuitBreakerOptions: CircuitBreakerOptions) {
     this.userServiceUrl = userServiceUrl;
-    // El circuit breaker debe envolver el método que hace la petición HTTP, no `updateOrCreateUser`.
+    // El circuit breaker envuelve el método que hace la petición HTTP, no `updateOrCreateUser`.
     this.circuitBreaker = new CircuitBreaker(
       this.updateOrCreateUserRequest.bind(this), // Corregido aquí
       circuitBreakerOptions
@@ -21,7 +21,7 @@ class UserAdapter {
       const response = await axios.post(`${this.userServiceUrl}/api/users/updatecreate`, userData);
       return response.data; 
     } catch (error) {
-      throw error;
+      console.log("Error calling /api/users/updatecreate ", error);
     }
   }
   

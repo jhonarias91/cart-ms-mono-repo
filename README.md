@@ -46,6 +46,8 @@ _Name space para dev_
 - Firebase domain not auth
     Agregar la external ip de react a los autorizados en firebase.
 
+- Cache, docker image
+    Cuando se hace un cambio poner una version que no exista en k8s, mostrar un cambio en el log inicial apra verificar que toma la íltima version.
 ## States
 - CrashLoopBackOff: error al iniciar el container.
 

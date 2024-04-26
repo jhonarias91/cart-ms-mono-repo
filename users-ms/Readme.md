@@ -12,9 +12,9 @@
 
 - Delete
 
-```kubectl delete -f users-ms-deployment.yaml```
+```kubectl delete -f users-ms-config.yaml```
 
-```kubectl logs usersdb-statefulset-0```
+```kubectl delete -f users-ms-deployment.yaml```
 
 - logs
 

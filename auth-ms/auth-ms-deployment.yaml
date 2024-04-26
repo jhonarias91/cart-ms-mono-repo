@@ -15,11 +15,11 @@ spec:
     spec:
       containers:
       - name: auth-ms
-        image: jhonarias91/auth-ms:v2
+        image: jhonarias91/auth-ms:v9
         resources:
           limits:
-            memory: "128Mi"
-            cpu: "10m"
+            memory: "256Mi"
+            cpu: "50m"
         ports:
         - containerPort: 3500
         envFrom:

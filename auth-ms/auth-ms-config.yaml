@@ -5,7 +5,9 @@ metadata:
 data:
   PORT: "3500"
   TYPE: "service_account"
-  USERS_MS_BASE_URL: "http://users-ms:80"
+  NODE_ENV: "production"
+  USERS_MS_BASE_URL: "http://35.184.199.123:8000"
+  REACT_USERS_BASE_RUL: "http://146.148.38.150:4000"
   SECRET_KEY: "secret"
   PUBLIC_KAFKA_USER: "VLXJXOYVUEFBAQKD"
   PRIVATE_KAFKA_KEY: "VG9Ma3r32e+Oa8rw7Y5QWhHHujF1pu8LJGzfQQ5jZmkOkUCe3zdIsQdUUUtxppsi"

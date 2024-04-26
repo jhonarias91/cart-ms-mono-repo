@@ -18,7 +18,7 @@ if (!admin.apps.length) {
 const options: CircuitBreakerOptions = {
   failureThreshold: 3,
   baseTimeout: 300, 
-  maxTimeout: 20000  
+  maxTimeout: 5000  
 };
 
 const userAdapter = new UserAdapter(process.env.USERS_MS_BASE_URL, options);
@@ -69,7 +69,7 @@ export const Login = async (req: Request, res: Response) => {
 export const Register = async (req: Request, res: Response) => {
 
   try{
-      
+    console.log("auth-ms:-register",req.body);
     const adminLogin = req.path === '/api/admin/login';
     req.body.is_ambassador = adminLogin;
     
