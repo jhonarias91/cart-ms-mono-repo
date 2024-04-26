@@ -6,9 +6,9 @@ import {Product} from "../entity/product.entity";
 import {OrderItem} from "../entity/order-item.entity";
 import Stripe from "stripe";
 import {client} from "../index";
-import {User} from "../entity/user.entity";
 import {createTransport} from "nodemailer";
 import producer  from "../kafka/config";
+import { User } from "../models/user";
 
 export const Orders = async (req: Request, res: Response) => {
     const orders = await getRepository(Order).find({
@@ -50,8 +50,8 @@ export const CreateOrder = async (req: Request, res: Response) => {
         await queryRunner.startTransaction();
 
         let order = new Order();
-        order.user_id = link.user.id;
-        order.ambassador_email = link.user.email;
+        //order.user_id = link.user.id;
+        //order.ambassad  or_email = link.user.email;
         order.code = body.code;
         order.first_name = body.first_name;
         order.last_name = body.last_name;
@@ -133,10 +133,14 @@ export const ConfirmOrder = async (req: Request, res: Response) => {
 
     await repository.update(order.id, {complete: true});
 
-    const user = await getRepository(User).findOne(order.user_id);
+    //todo call users-ms
+    //const user:User = await axios  (User).findOne(order.user_id);
 
-    await client.zIncrBy('rankings', order.ambassador_revenue, user.name);
+    //todo: check what is the user.name for, could it be the uid from the order
+    //await client.zIncrBy('rankings', order.ambassador_revenue, user.name);
+    await client.zIncrBy('rankings', order.ambassador_revenue, order.uid);
    
+    //Send to event bus
     const value = JSON.stringify({
         ...order, 
         admin_revenue: order.total,

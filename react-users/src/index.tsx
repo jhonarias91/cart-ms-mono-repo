@@ -6,8 +6,13 @@ import reportWebVitals from './reportWebVitals';
 import axios from "axios";
 import {configureStore} from "./redux/configureStore";
 import {Provider} from "react-redux";
+import dotenv from 'dotenv';
 
-axios.defaults.baseURL = 'http://localhost:80/api/users';
+dotenv.config();
+
+const usersMsBase = process.env.REACT_APP_USERS_MS_BASE_URL;
+axios.defaults.baseURL = `${usersMsBase}/api/users`;
+
 axios.defaults.withCredentials = true;
 
 const store = configureStore()

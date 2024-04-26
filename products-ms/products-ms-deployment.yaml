@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: products-ms-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: products-ms
+  template:
+    metadata:
+      labels:
+        app: products-ms
+        area: back
+    spec:
+      containers:
+      - name: products-ms
+        image: jhonarias91/products-ms:v3
+        resources:
+          limits:
+            memory: "256Mi"
+            cpu: "150m"
+        ports:
+        - containerPort: 8001
+        envFrom:
+        - configMapRef:
+            name: products-ms-config
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: products-ms
+spec:
+  selector:
+    app: products-ms
+  ports:
+  - port: 8001
+    targetPort: 8001
+  type: LoadBalancer 
+  loadBalancerIP: 35.184.199.12x

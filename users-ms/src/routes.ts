@@ -8,9 +8,7 @@ import { UpdateCreate,AuthenticatedUser,Logout} from "./controller/user.controll
 export const routes = (router: Router) => {
     // Admin
     //router.post('/api/admin/register', Register);
-    
     router.get('/api/admin/ambassadors', AuthMiddleware, Ambassadors);
-
     // Ambassador
     
     router.get('/api/ambassador/rankings', AuthMiddleware, Rankings);

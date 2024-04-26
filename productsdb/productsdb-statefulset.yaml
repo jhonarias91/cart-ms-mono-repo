@@ -1,39 +1,40 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: usersdb-statefulset
+  name: productsdb-statefulset
   labels:
-    app: usersdb
+    app: productsdb
 spec:
-  serviceName: "usersdb-service"
+  serviceName: "productsdb"
   replicas: 1
   selector:
     matchLabels:
-      app: usersdb
+      app: productsdb
   template:
     metadata:
       labels:
-        app: usersdb
+        app: productsdb
         area: data
     spec:
       containers:
-        - name: usersdb
+        - name: productsdb
           image: mysql:8
           env:
             - name: MYSQL_DATABASE
-              value: users_db
+              value: products_db
             - name: MYSQL_ROOT_PASSWORD
               value: root
             - name: TZ
               value: 'America/Bogota'
-            - name: MYSQL_ALLOW_EMPTY_PASSWORD
-              value: "yes"
           ports:
             - containerPort: 3306
           volumeMounts:
             - name: dbdata
               mountPath: /var/lib/mysql
-          resources:
+          resources:          
+            requests:
+              memory: "512Mi"
+              cpu: "100m"
             limits:
               memory: "512Mi"
               cpu: "100m"
@@ -50,10 +51,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: usersdb
+  name: productsdb
 spec:
   selector:
-    app: usersdb
+    app: productsdb
   ports:
     - port: 3306
       targetPort: 3306

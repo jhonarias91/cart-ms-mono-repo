@@ -1,15 +1,7 @@
 version: '3.9'
 services:
-  backend:
-    container_name: products-ms
+  users:    
     build: .
-    ports:
-      - "8001:8001"
+    scale: 1
     volumes:
       - .:/app
-    networks:
-      - products-ms-network
-
-networks:
-  products-ms-network:
-    external: true

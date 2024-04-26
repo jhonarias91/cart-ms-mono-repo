@@ -4,7 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "nodemon src/index.ts && npm run seed:ambassadors && npm run seed:products && npm run seed:links && npm run seed:orders && npm run update:rankingsdocker",
+        "start": "nodemon src/index.ts",
         "seed:ambassadors": "ts-node src/seeder/ambassador.seeder.ts",
         "seed:products": "ts-node src/seeder/product.seeder.ts",
         "seed:links": "ts-node src/seeder/link.seeder.ts",

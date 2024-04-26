@@ -1,9 +1,29 @@
-# Products MS
+## Products-ms
+# K8S 
+- Deploy image
 
-- Se debe crear una red para acceder mediante el nombre del host (container_name)
-```docker network create products-ms-network```
+```docker build -t jhonarias91/products-ms:v2 .```
+```docker push jhonarias91/products-ms:v2```
 
+- Create K8S
 
-### Install
-- ```npm install ```
-- ```docker-compose up```
+```kubectl apply -f products-ms-config.yaml```
+```kubectl apply -f products-ms-deployment.yaml```
+
+- Delete
+
+```kubectl delete -f products-ms-config.yaml```
+
+```kubectl delete -f products-ms-deployment.yaml```
+
+# TypeOrm
+
+ - Crear archivo de migración:
+ ```npx typeorm migration:create -n products_migration```
+
+  - Ejecutar el script de migración, conectar por terminal a un pod:
+
+    ```npm run typeorm migration:run```
+    para eliminar
+    
+    ```npm run typeorm migration:revert```

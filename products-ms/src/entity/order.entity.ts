@@ -11,7 +11,7 @@ export class Order {
     transaction_id: string;
 
     @Column()
-    user_id: number;
+    uid: string;
 
     @Column()
     code: string;

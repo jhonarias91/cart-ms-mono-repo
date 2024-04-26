@@ -1,7 +1,7 @@
 import {Request, Response} from "express";
 import {verify} from "jsonwebtoken";
 import {getRepository} from "typeorm";
-import {User} from "../entity/user.entity";
+import { User } from "../models/user";
 
 export const AuthMiddleware = async (req: Request, res: Response, next: Function) => {
     try {
@@ -17,7 +17,8 @@ export const AuthMiddleware = async (req: Request, res: Response, next: Function
 
         const is_ambassador = req.path.indexOf('api/ambassador') >= 0;
 
-        const user = await getRepository(User).findOne(payload.id);
+        //todo: change to go firebase if fails, go to ms
+        const user:User = await getRepository(User).findOne(payload.id); 
 
         if ((is_ambassador && payload.scope !== 'ambassador') || (!is_ambassador && payload.scope !== 'admin')) {
             return res.status(401).send({

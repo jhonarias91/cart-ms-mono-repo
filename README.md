@@ -50,7 +50,7 @@ _Name space para dev_
     Cuando se hace un cambio poner una version que no exista en k8s, mostrar un cambio en el log inicial apra verificar que toma la íltima version.
 ## States
 - CrashLoopBackOff: error al iniciar el container.
-
+- OOMKilled: sin memoria suficiente dentro del container
     # Comands
 
 ### Info comands
