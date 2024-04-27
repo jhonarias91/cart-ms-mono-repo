@@ -15,11 +15,14 @@ spec:
     spec:
       containers:
       - name: email-ms
-        image: jhonarias91/email-ms:v1
+        image: jhonarias91/email-ms:v2
         resources:
           limits:
             memory: "128Mi"
             cpu: "250m"
+      envFrom:
+        - configMapRef:
+          name: email-ms-config  
 ---
 
 apiVersion: v1

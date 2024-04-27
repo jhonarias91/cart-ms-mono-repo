@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import axios from "axios";
 import Layout from "../components/Layout";
+import { axiosProductsApi } from '../axios/axiosInstances';
 
 const Rankings = () => {
     const [rankings, setRankings] = useState([]);
@@ -8,8 +8,7 @@ const Rankings = () => {
     useEffect(() => {
         (
             async () => {
-                const {data} = await axios.get('rankings');
-
+                const {data} = await axiosProductsApi.get('rankings');
                 setRankings(data);
             }
         )();

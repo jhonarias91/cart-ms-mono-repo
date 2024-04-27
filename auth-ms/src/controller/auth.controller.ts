@@ -66,6 +66,15 @@ export const Login = async (req: Request, res: Response) => {
     }
 }
 
+
+export const Logout = async (req: Request, res: Response) => {
+    res.cookie("jwt", "", {maxAge: 0});
+
+    res.send({
+        message: 'success'
+    });
+}
+
 export const Register = async (req: Request, res: Response) => {
 
   try{
@@ -135,6 +144,7 @@ export const Register = async (req: Request, res: Response) => {
             await producer.disconnect();
         }    
   }
+
 
 
 }

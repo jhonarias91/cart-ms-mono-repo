@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Layout from "../components/Layout";
 import Products from "./Products";
-import axios from "axios";
+import { axiosProductsApi } from '../axios/axiosInstances';
 import {Product} from "../models/product";
 import {Filters} from "../models/filters";
 
@@ -31,7 +31,7 @@ const ProductsBackend = () => {
                     arr.push(`page=${filters.page}`);
                 }
 
-                const {data} = await axios.get(`products/backend?${arr.join('&')}`);
+                const {data} = await axiosProductsApi.get(`/backend?${arr.join('&')}`);
 
                 setProducts(filters.page === 1 ? data.data : [...products, ...data.data]);
                 setLastPage(data.meta.last_page);

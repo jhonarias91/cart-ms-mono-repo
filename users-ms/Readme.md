@@ -2,13 +2,16 @@
 # K8S 
 - Deploy image
 
-```docker build -t jhonarias91/users-ms:v1 .```
-```docker push jhonarias91/users-ms:v1```
+```docker build -t jhonarias91/users-ms:v5 .```
+```docker push jhonarias91/users-ms:v5```
 
 - Create K8S
 
 ```kubectl apply -f users-ms-config.yaml```
 ```kubectl apply -f users-ms-deployment.yaml```
+
+- Migration
+```npm run typeorm migration:run```
 
 - Delete
 

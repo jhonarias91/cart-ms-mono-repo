@@ -2,15 +2,17 @@ import React, {Dispatch, useState} from 'react';
 import {connect} from "react-redux";
 import {Link, NavLink, Redirect} from 'react-router-dom';
 import {User} from "../models/user";
-import axios from "axios";
 import {setUser} from "../redux/actions/setUserAction";
+import { axiosAuthApi } from '../axios/axiosInstances';
 
 const Nav = (props: any) => {
     const logout = async () => {
         try {
-            await axios.post('logout')
+            await axiosAuthApi.post('logout')
             props.setUser(null); 
+            localStorage.removeItem('firebaseToken');
         } catch (error) {
+            localStorage.removeItem('firebaseToken');
             console.error('Error logging out:', error);
             props.setUser(null); 
         }

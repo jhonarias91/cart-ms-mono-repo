@@ -16,7 +16,12 @@ createConnection().then(async () => {
     await client.connect();
 
     const app = express();
-
+    
+    app.use(cors({
+        credentials: true,
+        origin: [process.env.REACT_USERS_BASE_RUL,process.env.CHECKOUT_URL ]
+    }));
+      
     app.use(express.json());
     const router = express.Router();
     routes(router);

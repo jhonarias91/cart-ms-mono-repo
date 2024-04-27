@@ -9,7 +9,7 @@ import {
     UpdateProduct
 } from "./controller/product.controller";
 import {CreateLink, GetLink, Links, Stats} from "./controller/link.controller";
-import {ConfirmOrder, CreateOrder, Orders} from "./controller/order.controller";
+import {ConfirmOrder, CreateOrder, Orders, Rankings} from "./controller/order.controller";
 import { HealthCheck } from "./controller/health.controller";
 
 
@@ -40,10 +40,10 @@ export const routes = (router: Router) => {
     router.get('/api/products/backend', ProductsBackend);
     router.post('/api/products/links', AuthMiddleware, CreateLink);
     router.get('/api/products/stats', AuthMiddleware, Stats);
-    //router.get('/api/ambassador/rankings', AuthMiddleware, Rankings);
+    router.get('/api/products/rankings', AuthMiddleware, Rankings);
 
     // Checkout
-    router.get('/api/checkout/links/:code', GetLink);
-    router.post('/api/checkout/orders', CreateOrder);
-    router.post('/api/checkout/orders/confirm', ConfirmOrder);
+    router.get('/api/products/checkout/links/:code', GetLink);
+    router.post('/api/products/checkout/orders', CreateOrder);
+    router.post('/api/products/checkout/orders/confirm', ConfirmOrder);
 }

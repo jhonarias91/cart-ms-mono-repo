@@ -1,13 +1,12 @@
-# K8S
+# React users
+## K8S
 - Deploy image
 
-```docker build -t jhonarias91/react-users:v3 .```
+```docker build -t jhonarias91/react-users:v6 .```
 
-```docker push jhonarias91/react-users:v3```
+```docker push jhonarias91/react-users:v6```
 
 - Create
-
-```kubectl apply -f react-users-config.yaml```
 
 ```kubectl apply -f react-users-deployment.yaml```
 

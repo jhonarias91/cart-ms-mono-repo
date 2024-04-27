@@ -54,6 +54,27 @@ export const ProductsBackend = async (req: Request, res: Response) => {
         });
     }
 
+    /*
+    a mi si me afecto la decisión de no decidir como los equipos.
+
+        Bueno primero de todo el contenido que se ve que es de mucha calidad, no
+        //me lo llevo todo y quien sabe si llevo a un 30-40%,
+         pero si queda mucha curiosidad en seguir investigando y aplicando siempre que pueda.
+
+         Por otro lado, no tuve la oportunidad de tener discusiones 
+         de arquetctura con otro compañero, que me refuctara o me diera otra visión,
+         entonces eso puede pesar.  Y ps si los compañeros tuvieron que trabajar yo 
+         tuve que hacerlo el doble. 
+
+         Me llevo una sensación de que quise hacer más en el monolito, pero no me dio.
+
+         Profe solo 2 cosas negativas una es el tema de la puntualidad y e feeback por ejemplo
+         de los diagramas si me quedo faltando,  y espero que no se acuerde
+         de esto mañana, eso es todo muchas gracias profe. depronto si falto desde el pricipio acotar
+         y dejar que se esperaba puntualmente en la entrega.
+    */
+    //
+
     if (req.query.s) {
         const s = req.query.s.toString().toLowerCase();
 

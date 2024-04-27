@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: auth-ms
-        image: jhonarias91/auth-ms:v9
+        image: jhonarias91/auth-ms:v10
         resources:
           limits:
             memory: "256Mi"

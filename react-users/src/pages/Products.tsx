@@ -1,7 +1,12 @@
 import React, {useState} from 'react';
 import {Product} from "../models/product";
 import {Filters} from "../models/filters";
-import axios from "axios";
+import { axiosProductsApi } from '../axios/axiosInstances';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const checkoutUrl = process.env.CHECKOUT_URL;
 
 const Products = (props: {
     products: Product[],
@@ -50,14 +55,14 @@ const Products = (props: {
 
     const generate = async () => {
         try {
-            const {data} = await axios.post('links', {
+            const {data} = await axiosProductsApi.post('links', {
                 products: selected
             });
 
             setNotify({
                 show: true,
                 error: false,
-                message: `http://localhost:5000/${data.code}`
+                message: `${checkoutUrl}/${data.code}`
             });
         } catch (e) {
             setNotify({

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: products-ms
+spec:
+  selector:
+    app: products-ms
+  ports:
+  - port: 8001
+    targetPort: 8001
+  type: LoadBalancer 
+  loadBalancerIP: 35.193.57.94

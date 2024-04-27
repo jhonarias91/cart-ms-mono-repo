@@ -5,5 +5,5 @@
 ```kubectl apply -f mailhog-deployment.yaml```
 
 - Delete
-```kubectl delete -f mailhog-deployment.yaml.yaml```
+```kubectl delete -f mailhog-deployment.yaml```
 

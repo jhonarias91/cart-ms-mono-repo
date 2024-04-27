@@ -38,26 +38,6 @@ export const Ambassadors = async (req: Request, res: Response) => {
     }));
 }
 
-export const Rankings = async (req: Request, res: Response) => {
-
-    //Todo: move this to ranking
-    //+inf,-inf: get elements from higher score to lower score
-    const result: string[] = await client.sendCommand(['ZREVRANGEBYSCORE', 'rankings', '+inf', '-inf', 'WITHSCORES']);
-    let name;
-
-    res.send(result.reduce((o, r) => {
-        if (isNaN(parseInt(r))) {
-            name = r;
-            return o;
-        } else {
-            return {
-                ...o,
-                [name]: parseInt(r)
-            };
-        }
-    }, {}));
-}
-
 export const UpdateCreate = async (req: Request, res: Response) => {
     const {first_name, last_name,email,uid,provider, ...body} = req.body;
 
@@ -103,12 +83,3 @@ export const AuthenticatedUser = async (req: Request, res: Response) => {
     console.log(user);
     return res.send(user);
 }
-
-export const Logout = async (req: Request, res: Response) => {
-    res.cookie("jwt", "", {maxAge: 0});
-
-    res.send({
-        message: 'success'
-    });
-}
-

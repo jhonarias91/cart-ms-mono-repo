@@ -1,3 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: react-users-config
+data:
+  REACT_APP_FIREBASE_API_KEY: "AIzaSyCMKNKYTKBQ_lajMUwhXcd6RJbW1vjuB3U"
+  REACT_APP_FIREBASE_AUTH_DOMAIN: "cart-ms-auth-ms.firebaseapp.com"
+  REACT_APP_FIREBASE_PROJECT_ID: "cart-ms-auth-ms"
+  REACT_APP_FIREBASE_STORAGE_BUCKET: "cart-ms-auth-ms.appspot.com"
+  REACT_APP_FIREBASE_MESSAGING_SENDER_ID: "768252017316"
+  REACT_APP_FIREBASE_APP_ID: "1:768252017316:web:16b0cc47cbc2891a124431"
+  REACT_APP_FIREBASE_MEASUREMENT_ID: "G-8HN6PTPR1Q"
+  REACT_APP_AUTH_MS_BASE_URL: "http://34.27.95.129:3500"
+  REACT_APP_PRODUCTS_MS_BASE_RUL : "http://35.193.57.94:8001"
+  CHECKOUT_URL: "http://34.67.165.88:5000"
+
+---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -15,11 +33,14 @@ spec:
     spec:
       containers:
       - name: react-users
-        image: jhonarias91/react-users:v3
+        image: jhonarias91/react-users:v6
         resources:
-          limits:
+          requests:
             memory: "128Mi"
             cpu: "50m"
+          limits:
+            memory: "256Mi"
+            cpu: "150m"
         ports:
         - containerPort: 80
         envFrom:

@@ -1,7 +1,5 @@
 import React, {SyntheticEvent, useState} from 'react';
 import '../Login.css';
-import axios from 'axios';
-import {Redirect} from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import {auth} from '../firebase';
@@ -14,15 +12,17 @@ const mapDispatchToProps = (dispatch: any) => ({
   setUser: (user:User) => dispatch(setUser(user))
 });
 
+
+
 const Login = (props: any) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [redirect, setRedirect] = useState(false);
     const history = useHistory(); // useHistory to redirect
+    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault();
-
+        
         try {
             if (email.trim().length !== 0 && password.trim().length != 0){
               signInWithEmailAndPassword(auth, email, password)
@@ -39,9 +39,9 @@ const Login = (props: any) => {
                     revenue:0
                   };
                   props.setUser(userData);
-                  history.push('/');
-                  user.getIdToken().then((tokenId) => {                                       
-                  
+                  user.getIdToken().then((tokenId) => {                                                         
+                  localStorage.setItem('firebaseToken', tokenId);             
+                  setIsLoggedIn(true);
 /*        
                     axios({
                         method: 'post',
@@ -58,6 +58,7 @@ const Login = (props: any) => {
                       console.error('Error:', error);
                     });
               */
+                    history.push('/');
                   }).catch((error) => {
                     console.error("Error getting thetoken ID", error);
                   });
@@ -86,9 +87,16 @@ const Login = (props: any) => {
           provider: user.providerData[0].providerId,
           revenue: 0
         };
-  
+        
+
         props.setUser(userData);
-        console.log(userData);
+        user.getIdToken().then((tokenId) => {                                                         
+        localStorage.setItem('firebaseToken', tokenId);             
+        setIsLoggedIn(true);
+          history.push('/');
+        }).catch((error) => {
+          console.error("Error getting thetoken ID", error);
+        });
         history.push('/');
       } catch (error) {
         console.error("Error on auth", error);

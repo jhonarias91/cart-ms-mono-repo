@@ -159,3 +159,24 @@ export const ConfirmOrder = async (req: Request, res: Response) => {
         message: 'success'
     });
 }
+
+
+export const Rankings = async (req: Request, res: Response) => {
+    
+    //+inf,-inf: get elements from higher score to lower score
+    const result: string[] = await client.sendCommand(['ZREVRANGEBYSCORE', 'rankings', '+inf', '-inf', 'WITHSCORES']);
+    let name;
+
+    res.send(result.reduce((o, r) => {
+        if (isNaN(parseInt(r))) {
+            name = r;
+            return o;
+        } else {
+            return {
+                ...o,
+                [name]: parseInt(r)
+            };
+        }
+    }, {}));
+}
+

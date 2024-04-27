@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: next-checkout
-        image: jhonarias91/next-checkout:v1
+        image: jhonarias91/next-checkout:v2
         resources:
           limits:
             memory: "256Mi"
@@ -34,4 +34,5 @@ spec:
   ports:
   - port: 5000
     targetPort: 5000
-  type: ClusterIP
+  type: LoadBalancer
+  loadBalancerIP: 34.67.165.88

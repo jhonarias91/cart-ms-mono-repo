@@ -2,6 +2,15 @@ import {Request, Response} from "express";
 import {verify} from "jsonwebtoken";
 import {getRepository} from "typeorm";
 import { User } from "../models/user";
+import firebaseConfig from  "../firebase-adminsdk";
+import * as admin from 'firebase-admin';
+import {client} from "../index";
+
+if (!admin.apps.length) {
+    admin.initializeApp({
+      credential: admin.credential.cert(firebaseConfig)
+    });
+  }
 
 export const AuthMiddleware = async (req: Request, res: Response, next: Function) => {
     try {
@@ -18,6 +27,8 @@ export const AuthMiddleware = async (req: Request, res: Response, next: Function
         const is_ambassador = req.path.indexOf('api/ambassador') >= 0;
 
         //todo: change to go firebase if fails, go to ms
+        const decodedToken = await admin.auth().getBy(tokenId);   
+
         const user:User = await getRepository(User).findOne(payload.id); 
 
         if ((is_ambassador && payload.scope !== 'ambassador') || (!is_ambassador && payload.scope !== 'admin')) {

@@ -1,8 +1,9 @@
+# Next checkout
 # K8S
 - Deploy image
 
-```docker build -t jhonarias91/next-checkout:v1 .```
-```docker push jhonarias91/next-checkout:v1```
+```docker build -t jhonarias91/next-checkout:v2 .```
+```docker push jhonarias91/next-checkout:v2```
 
 - Create
 

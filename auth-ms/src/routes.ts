@@ -1,5 +1,5 @@
 import {Router} from "express";
-import {Login, Register} from "./controller/auth.controller";
+import {Login, Logout, Register} from "./controller/auth.controller";
 import { HealthCheck } from "./controller/health.controller";
 
 export const routes = (router: Router) => {
@@ -8,4 +8,5 @@ export const routes = (router: Router) => {
     //Register
     router.post('/api/auth/register', Register);
     router.get('/api/auth/health', HealthCheck)
+    router.post('/api/auth/logout', Logout);
 }

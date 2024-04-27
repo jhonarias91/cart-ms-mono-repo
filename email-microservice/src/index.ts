@@ -1,5 +1,8 @@
 import { EachMessagePayload, Kafka } from "kafkajs";
 import { createTransport } from "nodemailer"
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const kafka = new Kafka({
     clientId: 'my_email-consumer',
@@ -11,6 +14,7 @@ const kafka = new Kafka({
         password: 'VG9Ma3r32e+Oa8rw7Y5QWhHHujF1pu8LJGzfQQ5jZmkOkUCe3zdIsQdUUUtxppsi'
     }
 });
+const checkoutUrl = process.env.CHECKOUT_URL;
 
 const consumer = kafka.consumer({ groupId: 'my_email-consumer' });
 
@@ -25,7 +29,7 @@ const run = async () => {
     await consumer.run({
         eachMessage: async (message: EachMessagePayload) => {
             const order = JSON.parse(message.message.value.toString())
-            
+
             await transporter.sendMail({
                 from: 'from@example.com',
                 to: 'admin@admin.com',
@@ -45,7 +49,7 @@ const run = async () => {
                 to: order.email,
                 subject: `Purcharse on the Pyramid`,
                 html: ` ${order.first_name} thank you for your purcharse on the Pyramid 
-                on http://localhost:5000/${order.code} resume: ${resume(order.order_items)}`
+                on ${checkoutUrl}/${order.code} resume: ${resume(order.order_items)}`
             });
 
             await transporter.close();

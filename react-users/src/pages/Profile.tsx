@@ -1,9 +1,9 @@
 import React, {Dispatch, SyntheticEvent, useEffect, useState} from 'react';
 import Layout from "../components/Layout";
-import axios from "axios";
 import {connect} from "react-redux";
 import {User} from "../models/user";
 import {setUser} from "../redux/actions/setUserAction";
+import { axiosUsersApi } from '../axios/axiosInstances';
 
 const Profile = (props: any) => {
     const [first_name, setFirstName] = useState('');
@@ -21,7 +21,7 @@ const Profile = (props: any) => {
     const infoSubmit = async (e: SyntheticEvent) => {
         e.preventDefault();
 
-        const {data} = await axios.put('users/info', {
+        const {data} = await axiosUsersApi.put('info', {
             first_name,
             last_name,
             email
@@ -33,7 +33,7 @@ const Profile = (props: any) => {
     const passwordSubmit = async (e: SyntheticEvent) => {
         e.preventDefault();
 
-        await axios.put('users/password', {
+        await axiosUsersApi.put('password', {
             password,
             password_confirm
         })

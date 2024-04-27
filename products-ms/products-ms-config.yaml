@@ -6,6 +6,45 @@ data:
   PORT: "8001"
   SECRET_KEY: "secret"
   STRIPE_SECRET: "sk_test_51O14MdK9Gfq6HVtwrnS8As4ptDHMpr7b8LmhOH8iqXo7KKQ174F7Vj4OrcOQ4GB9HCxOUznUCi1Uzce9R4w4lrGi00xWfFQsFv"
-  CHECKOUT_URL: "http://localhost:5000"
+  CHECKOUT_URL: "http://34.67.165.88:5000"
   KAFKA_SECRET: "9yt90E9k9nUScNg4f6k7K3LBnMz+DfxiKIvvOwTbL3Jjh43TzHNrM2j53LZUK+n8"
   KAFKA_PUBLIC: "ESC6N5TJPSTJAUTX"
+
+  PROJECT_ID: "cart-ms-auth-ms"
+  PRIVATE_KEY_ID: "6c5df8ed9f22c0a4e7666741ab205e474afa2fae"
+  PRIVATE_KEY: |
+    -----BEGIN PRIVATE KEY-----
+    MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCbVCiAyEGfeB7g
+    s3SO6SV1SYxJzhttU9VGRnf1pGi0fySXpSW9YlQUFyY62sAJAOm2+UfzOzR+hWON
+    +62zbnWa5B8zfEAIELW8OWmRL7Jic9EWUIWt3/fHmBTn6HpdUV4Fu8YOYD1XurYr
+    eq0w/6lx/UXFh5pL8osWVejmeIDpdvXKVdKeslta15n/8UqhyiBHhOQwGQ15AVXC
+    TLp/vB/3AJsus/+XnZwMAdXpr7eikrDdrJA4dzx4Ex5heBbXKH6H/cWftGxABaXp
+    PzcU0UFcOumLNqFufc3YAD3g86lIYQ8+Bg41jwrTx4vhB0UpVdOMQuz6CicD5APW
+    rq4Aw+pNAgMBAAECggEAGL1+WAjNfv9sd6DNu2eCOly1FhpYfwDf0votaDhAHyOz
+    Kd45lSEgwDRxt+UYujZlg2nQHns7IL3RPg+suowo+jtEhvhO4Jn8wFaqrF/a+1h0
+    IKhBqpCmUCm2hrueJdfscGBYqviEPMF1+5XmGQxXqlrLbqtrFZaztaKIXpEqA0Va
+    JxLMKM12a7KcHzzt9B/nE5ddg80hwBVbf0N0QER0WVdhprhq8Tz0epYgdNzy56/G
+    iMWfTd1Z6PjIzWFOXVUaaTWVlEkeDU0wZroZxzLBzMEiKDr+dpsU4S8LUGMbWMts
+    J/I+CgaoJqbzI5YVs0kjqKJ1Qh1EiOWyeFywHxpQ0QKBgQDXzTRybeK51w5NWzXs
+    E0BSgEyEKXAea/FoUu0WwLRVOl9/AAokbN7rgQHAQJfV5hyfEZBkS3ET2ZnX3p5u
+    sSotIGF136ip7434XeC7JENRBTXYFt4Dt7v2DbKR3CCMgV1WSkY74v8EiDOP2Fk9
+    LyMGVDeHxFJ9IXRhRqZxmy92SQKBgQC4QzkPkEhGMYrW9CQrp5f8go2Cd3tRGFdE
+    fpFZwyhlAGW8ePipc6i107aSMlj2pv9tJneSqOQTM34f5KOvOGmFc1Vd9yK30d2Y
+    30rNkyCMAm+kWQ8P4r2vteabfa8ONlM4XFMd3Su6Fvhn1LTqYRuKmnibIzzN0j6A
+    090DAIpD5QKBgGpLqI7Is4nodSIDUG8lGGTKz2W154UElFdXqXKwnuLwKsOqqFRC
+    0BbeZ5dj+aYhf22WwDG2u08UuuOKwy0w1N5/eaIO9cwmtB5nV1+2v/WzhE8ZDGh2
+    Yv4SxydzbxDmU6xCT5AGAqkf0Y4D+gjaI/1lFCkquZrrFKEppKiG0P0JAoGAX09O
+    NZGxALXhlfwktXvz7sXswn5hB/pqMWCyeFatD0lcVlfQb34G1z5SYl6ui66n0mKi
+    WPcJOjFZXM/cJucsFb4pevg5OhHQ6KEfRSSEIkekTcNPOi1TZo7VYLprERPiifWf
+    fIQJeTEmfjaU+eMO5uut1LkuW1wTvnlYCZR+8E0CgYEAwzf/IlVK2asil/eboBpx
+    yy3uQ+OYRz9MVMwXH0O/EZoY1LSJ6NjCBVX26ECgbIWL2aZn3MYlMe/dE9B/HT/H
+    3aw5aJf2Gi2XSEgPQaA4nVgwq31amhD0CiV/6Kl98UvjyB3cZOaaAngMvgosrmZb
+    8WanDXQeJ6jTeMhLKZ59Nv8=
+    -----END PRIVATE KEY-----
+  CLIENT_EMAIL: "firebase-adminsdk-2rcu4@cart-ms-auth-ms.iam.gserviceaccount.com"
+  CLIENT_ID: "110066436717149992774"
+  AUTH_URI: "https://accounts.google.com/o/oauth2/auth"
+  TOKEN_URI: "https://oauth2.googleapis.com/token"
+  AUTH_PROVIDER_X509_CERT_URL: "https://www.googleapis.com/oauth2/v1/certs"
+  CLIENT_X509_CERT_URL: "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-2rcu4%40cart-ms-auth-ms.iam.gserviceaccount.com"
+  UNIVERSE_DOMAIN: "googleapis.com"

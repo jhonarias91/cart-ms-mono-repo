@@ -78,3 +78,13 @@ _Name space para dev_
 - Delete a pod
 
 ```kubectl delete pods users-ms-deployment-54f9f5d47c-rg4vq```
+
+Servicio de correo, usuarios
+servicio de autenticación - auth.
+crud de usuarios.
+ambassador.
+
+No dejar roles en la tabla de usuarios.
+tabla aparte con roles, usuarios, auth, autorizacion y perfil.
+
+Autenticación y autorizacion a firebase.

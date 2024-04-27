@@ -1,9 +1,9 @@
 import React, {Component, SyntheticEvent} from 'react';
-import axios from 'axios';
 import {Redirect} from 'react-router-dom';
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from '../firebase'; 
 import { log } from 'console';
+import { axiosAuthApi } from '../axios/axiosInstances';
 
 class Register extends Component {
     firstName = '';
@@ -68,30 +68,21 @@ class Register extends Component {
                 displayName: `${this.firstName} ${this.lastName}`
             });
             console.log("User registered: ", userCredential.user);
-            axios({
-                method: 'post',
-                url: '/api/auth/register',
-                baseURL: process.env.REACT_APP_AUTH_MS_BASE_URL,                
-                data:{
-                    first_name: this.firstName,
+            
+            axiosAuthApi.post('register',{
+                first_name: this.firstName,
                     last_name: this.lastName,
                     email:this.email,                    
                     uid: user.uid,
                     provider:user.providerId
-                }                    
-              })
-            .then(response => {
-              console.log('Success from us-ms:', response.data);
-                this.setState({
-                    redirect: true
-                });
-            })
-
+            }).then(response => {
+                console.log('Success from us-ms:', response.data);                 
+              });
             this.setState({
                 redirect: true
             });
         } catch (err:any) {
-            console.error(err);
+            console.error('Registration error:', err);
             this.setNotify(true, true, err.message  || "Failed to register");
         }
     }

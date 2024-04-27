@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Layout from "../components/Layout";
 import Products from "./Products";
 import {Product} from "../models/product";
-import axios from "axios";
+import { axiosProductsApi } from '../axios/axiosInstances';
 import {Filters} from "../models/filters";
 
 const ProductsFrontend = () => {
@@ -19,7 +19,7 @@ const ProductsFrontend = () => {
     useEffect(() => {
         (
             async () => {
-                const {data} = await axios.get('products/frontend');
+                const {data} = await axiosProductsApi.get('/frontend');
 
                 setAllProducts(data);
                 setFilteredProducts(data);

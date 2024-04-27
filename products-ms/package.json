@@ -10,6 +10,7 @@
         "seed:links": "ts-node src/seeder/link.seeder.ts",
         "seed:orders": "ts-node src/seeder/order.seeder.ts",
         "update:rankings": "ts-node src/seeder/rankings.ts",
+        "typeorm": "ts-node ./node_modules/typeorm/cli.js",
         "seeders": "npm run seed:ambassadors && npm run seed:products && npm run seed:links && npm run seed:orders && npm run update:rankings"
     },
     "keywords": [],
@@ -22,6 +23,7 @@
         "dotenv": "^10.0.0",
         "express": "^4.17.1",
         "faker": "^5.5.3",
+        "firebase-admin": "^12.1.0",
         "jsonwebtoken": "^8.5.1",
         "kafkajs": "^2.2.4",
         "mysql2": "^2.3.3",

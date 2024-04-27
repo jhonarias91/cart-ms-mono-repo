@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: users-ms-deployment
 spec:
-  replicas: 2
+  replicas: 1 #add more replicas, check quota limit.
   selector:
     matchLabels:
       app: users-ms
@@ -15,11 +15,14 @@ spec:
     spec:
       containers:
       - name: users-ms
-        image: jhonarias91/users-ms:v4
+        image: jhonarias91/users-ms:v5
         resources:
+          requests:
+            memory: "128Mi"
+            cpu: "50m"
           limits:
             memory: "256Mi"
-            cpu: "200m"
+            cpu: "100m"
         ports:
         - containerPort: 8000
         envFrom:

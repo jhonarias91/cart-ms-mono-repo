@@ -5,8 +5,7 @@
 - Delete
 
 ```kubectl delete -f usersdb-statefulset.yaml```
-
-```kubectl logs usersdb-statefulset-0```
+```kubectl delete pvc dbdata-usersdb-statefulset-0```
 
 
 # StatefulSet

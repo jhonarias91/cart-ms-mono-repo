@@ -6,9 +6,14 @@
 
 - Create
 
+```kubectl apply -f email-ms-config.yaml```
+
 ```kubectl apply -f email-ms-deployment.yaml```
 
 - Delete
 
+```kubectl delete -f email-ms-config.yaml```
+
 ```kubectl delete -f email-ms-deployment.yaml```
+
 
