@@ -4,18 +4,23 @@ import {Link, NavLink, Redirect} from 'react-router-dom';
 import {User} from "../models/user";
 import {setUser} from "../redux/actions/setUserAction";
 import { axiosAuthApi } from '../axios/axiosInstances';
+import { useHistory } from "react-router-dom";
 
 const Nav = (props: any) => {
+    const history = useHistory();
+
     const logout = async () => {
         try {
             await axiosAuthApi.post('logout')
             props.setUser(null); 
             localStorage.removeItem('firebaseToken');
+            history.push('/');
         } catch (error) {
             localStorage.removeItem('firebaseToken');
             console.error('Error logging out:', error);
             props.setUser(null); 
-        }
+            history.push('/');
+        }        
     }
 
     let menu;

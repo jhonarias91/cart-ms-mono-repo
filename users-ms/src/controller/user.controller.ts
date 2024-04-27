@@ -83,3 +83,13 @@ export const AuthenticatedUser = async (req: Request, res: Response) => {
     console.log(user);
     return res.send(user);
 }
+
+export const UpdateInfo = async (req: Request, res: Response) => {
+    const user: User = req["user"];
+
+    const repository = getRepository(User);
+
+    await repository.update(user.uid, req.body);
+
+    res.send(await repository.findOne(user.uid));
+}

@@ -13,12 +13,13 @@ const mapDispatchToProps = (dispatch: any) => ({
 });
 
 
-
 const Login = (props: any) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const history = useHistory(); // useHistory to redirect
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+    const [successMessage, setSuccessMessage] = useState('');
+    const [error, setError] = useState('');
 
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault();
@@ -65,6 +66,11 @@ const Login = (props: any) => {
                 })
                 .catch((error) => {
                   console.error("Error on auth", error);
+                  const errorMessage = error.response?.data?.error?.message || "Failed to update information. Please try again.";
+                  console.error(errorMessage);
+                  setError(errorMessage);
+                  setSuccessMessage('');
+
                 });
             }
         } catch (error) {
@@ -143,7 +149,8 @@ const Login = (props: any) => {
               />
               Sign in with Gooogle
       </button>
-                
+             {error && <p className="text-danger">{error}</p>}
+            {successMessage && <p className="text-success">{successMessage}</p>}   
             </form>
         </main>
     );

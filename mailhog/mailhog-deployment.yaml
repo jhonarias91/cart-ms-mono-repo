@@ -19,7 +19,7 @@ spec:
         resources:
           limits:
             memory: "128Mi"
-            cpu: "500m"
+            cpu: "100m"
         ports:
         - containerPort: 1025
           #hostPort: 1025
@@ -43,4 +43,5 @@ spec:
     protocol: TCP
     port: 8025
     targetPort: 8025
-  type: ClusterIP
+  type: LoadBalancer 
+  loadBalancerIP: 104.155.188.217

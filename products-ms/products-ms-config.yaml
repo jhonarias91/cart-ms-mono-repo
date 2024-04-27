@@ -48,3 +48,6 @@ data:
   AUTH_PROVIDER_X509_CERT_URL: "https://www.googleapis.com/oauth2/v1/certs"
   CLIENT_X509_CERT_URL: "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-2rcu4%40cart-ms-auth-ms.iam.gserviceaccount.com"
   UNIVERSE_DOMAIN: "googleapis.com"
+  USERS_MS_BASE_URL: "http://35.184.199.123:8000"
+  REACT_USERS_BASE_RUL: "http://146.148.38.150:4000"
+  

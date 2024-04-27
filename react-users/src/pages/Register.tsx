@@ -64,11 +64,11 @@ class Register extends Component {
                 this.password
             );
             const user = userCredential.user;
+
             await updateProfile(user, {
-                displayName: `${this.firstName} ${this.lastName}`
+                displayName: `${this.firstName}`
             });
-            console.log("User registered: ", userCredential.user);
-            
+                      
             axiosAuthApi.post('register',{
                 first_name: this.firstName,
                     last_name: this.lastName,

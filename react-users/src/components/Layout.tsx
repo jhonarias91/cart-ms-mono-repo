@@ -17,8 +17,9 @@ const Layout = (props: any) => {
         (
             async () => {
                 try {
+                    //now I'm just using firebase, so, no needed to get the user
         //const {data} = await axiosUsersApi.get('user');
-        //props.setUser(data);
+        //props.setUser(data); 
         const auth = getAuth(); // Get the Firebase Auth instance
         const token = localStorage.getItem('firebaseToken');
      
