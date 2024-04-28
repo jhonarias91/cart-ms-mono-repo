@@ -2,8 +2,8 @@
 # K8S 
 - Deploy image
 
-```docker build -t jhonarias91/users-ms:v5 .```
-```docker push jhonarias91/users-ms:v5```
+```docker build -t jhonarias91/users-ms:v6 .```
+```docker push jhonarias91/users-ms:v6```
 
 - Create K8S
 

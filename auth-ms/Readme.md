@@ -1,8 +1,8 @@
 # K8S
 - Deploy image
 
-```docker build -t jhonarias91/auth-ms:v10 .```
-```docker push jhonarias91/auth-ms:v10```
+```docker build -t jhonarias91/auth-ms:v19 .```
+```docker push jhonarias91/auth-ms:v19```
 
 - Create
 

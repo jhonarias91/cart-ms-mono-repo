@@ -5,3 +5,5 @@ services:
     scale: 1
     volumes:
       - .:/app
+    env_file:
+      - .env

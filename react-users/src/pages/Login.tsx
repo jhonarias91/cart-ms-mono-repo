@@ -7,6 +7,7 @@ import {User} from "../models/user";
 import { connect } from 'react-redux';
 import { setUser } from '../redux/actions/setUserAction';
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { axiosAuthApi } from '../axios/axiosInstances';
 
 const mapDispatchToProps = (dispatch: any) => ({
   setUser: (user:User) => dispatch(setUser(user))
@@ -43,25 +44,29 @@ const Login = (props: any) => {
                   user.getIdToken().then((tokenId) => {                                                         
                   localStorage.setItem('firebaseToken', tokenId);             
                   setIsLoggedIn(true);
-/*        
-                    axios({
+       
+                  axiosAuthApi({
                         method: 'post',
-                        url: '/api/auth/login',
-                        baseURL: process.env.REACT_APP_AUTH_MS_BASE_URL,
+                        url: 'login',                        
                         data:{
                             tokenId: tokenId
                         }                    
                       })
                     .then(response => {                      
-                      history.push('/'); // Redireccionar al home después del login exitoso
+                      history.push('/'); 
                     })
                     .catch(error => {
                       console.error('Error:', error);
+                      setError(error);
+                      setSuccessMessage('');
                     });
-              */
+              
                     history.push('/');
                   }).catch((error) => {
                     console.error("Error getting thetoken ID", error);
+                    setError(error);
+                    setSuccessMessage('');
+  
                   });
                 })
                 .catch((error) => {
@@ -97,8 +102,26 @@ const Login = (props: any) => {
 
         props.setUser(userData);
         user.getIdToken().then((tokenId) => {                                                         
-        localStorage.setItem('firebaseToken', tokenId);             
+        localStorage.setItem('firebaseToken', tokenId);                     
         setIsLoggedIn(true);
+
+        axiosAuthApi({
+          method: 'post',
+          url: 'login',                        
+          data:{
+              tokenId: tokenId
+          }                    
+        })
+        .then(response => {                      
+          history.push('/'); 
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          setError(error);
+          setSuccessMessage('');
+        });
+
+
           history.push('/');
         }).catch((error) => {
           console.error("Error getting thetoken ID", error);

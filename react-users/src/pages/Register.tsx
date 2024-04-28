@@ -76,7 +76,7 @@ class Register extends Component {
                     uid: user.uid,
                     provider:user.providerId
             }).then(response => {
-                console.log('Success from us-ms:', response.data);                 
+                console.log('Success from auth-ms:', response.data);                 
               });
             this.setState({
                 redirect: true

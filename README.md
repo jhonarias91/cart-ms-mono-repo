@@ -88,3 +88,7 @@ No dejar roles en la tabla de usuarios.
 tabla aparte con roles, usuarios, auth, autorizacion y perfil.
 
 Autenticación y autorizacion a firebase.
+
+# TODO:
+
+- deploy products-ms and react

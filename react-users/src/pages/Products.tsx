@@ -3,11 +3,10 @@ import {Product} from "../models/product";
 import {Filters} from "../models/filters";
 import { axiosProductsApi } from '../axios/axiosInstances';
 import dotenv from 'dotenv';
+import { User } from '../models/user';
 
 dotenv.config();
-
-const checkoutUrl = process.env.CHECKOUT_URL;
-
+const checkoutUrl = process.env.REACT_APP_CHECKOUT_URL;
 const Products = (props: {
     products: Product[],
     filters: Filters,
@@ -54,15 +53,17 @@ const Products = (props: {
     }
 
     const generate = async () => {
+    
         try {
             const {data} = await axiosProductsApi.post('links', {
-                products: selected
+                products: selected,
+                token: localStorage.getItem("firebaseToken")
             });
 
             setNotify({
                 show: true,
                 error: false,
-                message: `${checkoutUrl}/${data.code}`
+                message: `http://34.67.165.88:5000/${data.code}`
             });
         } catch (e) {
             setNotify({

@@ -16,9 +16,9 @@ if (!admin.apps.length) {
   }
 
 const options: CircuitBreakerOptions = {
-  failureThreshold: 3,
-  baseTimeout: 300, 
-  maxTimeout: 5000  
+  failureThreshold: 2,
+  baseTimeout: 100, 
+  maxTimeout: 10000  
 };
 
 const userAdapter = new UserAdapter(process.env.USERS_MS_BASE_URL, options);
@@ -27,32 +27,19 @@ export const Login = async (req: Request, res: Response) => {
 
     try{
         const { tokenId  } = req.body;       
-        const decodedToken = await admin.auth().verifyIdToken(tokenId);        
-       /*
-         {        
-         iss: 'https://securetoken.google.com/cart-ms-auth-ms',
-         aud: 'cart-ms-auth-ms',
-         auth_time: 1713711647,
-         user_id: 'cuNIS6z7j4b7DhPiTx3SbNLl3LD3',
-         sub: 'cuNIS6z7j4b7DhPiTx3SbNLl3LD3',
-         iat: 1713711647,
-         exp: 1713715247,
-         email: 'jhonarias91@gmail.com',
-         email_verified: false,
-         firebase: { identities: { email: [Array] }, sign_in_provider: 'password' },
-         uid: 'cuNIS6z7j4b7DhPiTx3SbNLl3LD3'
-       }*/        
-        const adminLogin = req.path === '/api/admin/login';
-      
+        const decodedToken = await admin.auth().verifyIdToken(tokenId);                    
+        const ambassador = req.path === '/api/auth/login';
+
         const token = sign({
-          id: decodedToken.uid,
-          scope: adminLogin ? "admin" : "ambassador"
+             decodedToken
+            ,scope: ambassador ? "ambassador": "admin"
       }, process.env.SECRET_KEY);
       
         res.cookie("jwt", token, {
             httpOnly: true,
-            maxAge: 24 * 60 * 60 * 1000//1 day
-        })
+            maxAge: 24 * 60 * 60 * 1000,//1 day
+            sameSite: 'lax', // Can be 'lax' or 'strict' if not using 'None'
+        });        
 
         res.send({
             message: 'success'
@@ -66,10 +53,8 @@ export const Login = async (req: Request, res: Response) => {
     }
 }
 
-
 export const Logout = async (req: Request, res: Response) => {
     res.cookie("jwt", "", {maxAge: 0});
-
     res.send({
         message: 'success'
     });
@@ -78,19 +63,17 @@ export const Logout = async (req: Request, res: Response) => {
 export const Register = async (req: Request, res: Response) => {
 
   try{
-    console.log("auth-ms:-register",req.body);
     const adminLogin = req.path === '/api/admin/login';
     req.body.is_ambassador = adminLogin;
     
-    const maxRetries = 3; // Max number of attempts
+    const maxRetries = 1; // Max number of attempts
     let attempts = 0;
     let userResult;
     
     //Retry mechanism
-    while (attempts < maxRetries) {
+   while (attempts < maxRetries) {
 
         const data :UserData = req.body;
-        
         try {
             
             userResult = await userAdapter.updateOrCreateUser(data);
@@ -106,8 +89,8 @@ export const Register = async (req: Request, res: Response) => {
                 });
             }
 
-            // Wait 500 milliseconds before retrying
-            await new Promise(resolve => setTimeout(resolve, 1001));
+            // Wait 1001 milliseconds before retrying
+            await new Promise(resolve => setTimeout(resolve, 1000));
         }
     }
 
@@ -144,7 +127,4 @@ export const Register = async (req: Request, res: Response) => {
             await producer.disconnect();
         }    
   }
-
-
-
 }

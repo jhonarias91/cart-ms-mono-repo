@@ -35,12 +35,15 @@ export const routes = (router: Router) => {
     router.get('/api/admin/orders', AuthMiddleware, Orders);
 
     // Ambassador
-
     router.get('/api/products/frontend', ProductsFrontend);
     router.get('/api/products/backend', ProductsBackend);
+    //router.post('/api/products/links', AuthMiddleware, CreateLink);
+    //router.get('/api/products/stats', AuthMiddleware, Stats);
+    //router.get('/api/products/rankings', AuthMiddleware, Rankings);
+
     router.post('/api/products/links', AuthMiddleware, CreateLink);
-    router.get('/api/products/stats', AuthMiddleware, Stats);
-    router.get('/api/products/rankings', AuthMiddleware, Rankings);
+    router.get('/api/products/stats',  Stats);
+    router.get('/api/products/rankings', Rankings);
 
     // Checkout
     router.get('/api/products/checkout/links/:code', GetLink);

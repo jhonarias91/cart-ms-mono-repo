@@ -33,8 +33,7 @@ export const CreateOrder = async (req: Request, res: Response) => {
     const body = req.body;
 
     const link = await getRepository(Link).findOne({
-        where: {code: body.code},
-        relations: ['user']
+        where: {code: body.code}
     });
 
     if (!link) {
@@ -51,7 +50,8 @@ export const CreateOrder = async (req: Request, res: Response) => {
 
         let order = new Order();
         //order.user_id = link.user.id;
-        //order.ambassad  or_email = link.user.email;
+        order.ambassador_email = body.user.email;
+        order.uid = body.user.uid;
         order.code = body.code;
         order.first_name = body.first_name;
         order.last_name = body.last_name;
@@ -110,7 +110,7 @@ export const CreateOrder = async (req: Request, res: Response) => {
         await queryRunner.rollbackTransaction();
 
         return res.status(400).send({
-            message: 'Error occurred!'
+            message: `Error occurred! - ${e}`
         });
     }
 }

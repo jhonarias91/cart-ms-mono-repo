@@ -15,14 +15,14 @@ spec:
     spec:
       containers:
       - name: products-ms
-        image: jhonarias91/products-ms:v9
+        image: jhonarias91/products-ms:v18
         resources:
           requests:
             memory: "128Mi"
             cpu: "50m"
           limits:
             memory: "256Mi"
-            cpu: "100m"
+            cpu: "70m"
         ports:
         - containerPort: 8001
         envFrom:

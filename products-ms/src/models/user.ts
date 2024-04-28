@@ -1,11 +1,11 @@
 
 export class User {
     
-    uid: string;
+    uid: string ;
 
-    first_name: string;
+    first_name: string ;
    
-    last_name: string;
+    last_name: string ;
   
     email: string;
 

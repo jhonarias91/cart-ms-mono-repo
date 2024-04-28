@@ -1,6 +1,7 @@
 import {Request, Response} from "express";
 import {getRepository} from "typeorm";
 import {Link} from "../entity/link.entity";
+import { User } from "../models/user";
 
 export const Links = async (req: Request, res: Response) => {
     const links = await getRepository(Link).find({
@@ -14,10 +15,12 @@ export const Links = async (req: Request, res: Response) => {
 }
 
 export const CreateLink = async (req: Request, res: Response) => {
+    const token: User = req.body.token;
+
     const user = req['user'];
 
     const link = await getRepository(Link).save({
-        user,
+        uid: user.uid,
         code: Math.random().toString(36).substring(6),
         products: req.body.products.map(id => ({id}))
     });
@@ -26,7 +29,7 @@ export const CreateLink = async (req: Request, res: Response) => {
 }
 
 export const Stats = async (req: Request, res: Response) => {
-    const user = req['user'];
+    const user = req.body.user;
 
     const links = await getRepository(Link).find({
         where: {user},
@@ -49,7 +52,6 @@ export const GetLink = async (req: Request, res: Response) => {
         where: {
             code: req.params.code
         },
-        //relations: ['user', 'products']
         relations: ['products']
     }))
 }

@@ -3,6 +3,7 @@ import {useRouter} from "next/router";
 import {SyntheticEvent, useEffect, useState} from "react";
 import axios from "axios";
 import constants from "../constants";
+import { todo } from "node:test";
 
 declare var Stripe;
 
@@ -25,10 +26,10 @@ export default function Home() {
         if (code != undefined) {
             (
                 async () => {
-                    //http://localhost:8001/api/checkout
+                    //http://localhost:8001/api/checkout/links/:code
                     const {data} = await axios.get(`${constants.endpoint}/links/${code}`);
 
-                    setUser(data.user);
+                    setUser(data.uid);
                     setProducts(data.products);
                     setQuantities(data.products.map(p => ({
                         product_id: p.id,
@@ -69,6 +70,7 @@ export default function Home() {
             setError('Please select at least one product!'); 
             return null;
         }
+        //todo: check error on creation
          //http://localhost:8001/api/checkout/orders
         const {data} = await axios.post(`${constants.endpoint}/orders`, {
             first_name,
@@ -79,6 +81,7 @@ export default function Home() {
             city,
             zip,
             code,
+            user,
             products: quantities
         });
 

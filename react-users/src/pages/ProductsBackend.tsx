@@ -31,7 +31,7 @@ const ProductsBackend = () => {
                     arr.push(`page=${filters.page}`);
                 }
 
-                const {data} = await axiosProductsApi.get(`/backend?${arr.join('&')}`);
+                const {data} = await axiosProductsApi.get(`backend?${arr.join('&')}`);
 
                 setProducts(filters.page === 1 ? data.data : [...products, ...data.data]);
                 setLastPage(data.meta.last_page);
@@ -41,7 +41,7 @@ const ProductsBackend = () => {
 
     return (
         <Layout>
-            <Products products={products} filters={filters} setFilters={setFilters} lastPage={lastPage}/>
+            <Products products={products} filters={filters} setFilters={setFilters} lastPage={lastPage} />
         </Layout>
     );
 };

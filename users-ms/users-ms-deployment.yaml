@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: users-ms
-        image: jhonarias91/users-ms:v5
+        image: jhonarias91/users-ms:v6
         resources:
           requests:
             memory: "128Mi"

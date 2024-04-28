@@ -50,10 +50,11 @@ export class CircuitBreaker {
     this.failureCount++;
     if (this.failureCount > this.failureThreshold) {
       this.state = BREACKER_STATE.OPEN;
-      const timeout = Math.min(this.baseTimeout * (2 ** this.failureCount), this.maxTimeout);
+      const timeout = Math.min(this.baseTimeout * 2 ** (this.failureCount - 1), this.maxTimeout);
       this.nextAttempt = Date.now() + timeout;
+      this.failureCount = 0;
     }
-  }
+  }   
 }
 
 enum BREACKER_STATE{

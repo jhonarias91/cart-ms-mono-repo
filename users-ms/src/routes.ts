@@ -19,3 +19,4 @@ export const routes = (router: Router) => {
     router.get('/api/users/user', AuthenticatedUser);
 
 }
+setUserReducer
